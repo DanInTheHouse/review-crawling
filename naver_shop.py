@@ -4,6 +4,7 @@ import time
 
 from math import ceil
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup
 
 # from selenium.webdriver.common.by import By
@@ -14,14 +15,13 @@ from bs4 import BeautifulSoup
 
 class naver_review:
     def __init__(self, url):
-        options = webdriver.ChromeOptions()
+        options = Options()
         options.add_argument('--headless')
-        options.add_argument('--no-gpu')
         options.add_argument('--no-sandbox')
         options.add_argument('--disable-dev-shm-usage')
 
-        self.__driver = webdriver.Chrome("chromedriver", options=options)
-        self.__url = url
+        self.__driver = webdriver.Chrome(options=options)
+        self.__driver.get(url)
         self.__reviews = []
 
     def get_last_page(self):
